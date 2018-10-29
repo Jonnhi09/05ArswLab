@@ -5,7 +5,6 @@
  */
 package edu.eci.arsw.blueprints.filters.impl;
 
-import com.sun.javafx.scene.control.skin.VirtualFlow;
 import edu.eci.arsw.blueprints.filters.Filter;
 import edu.eci.arsw.blueprints.model.Blueprint;
 import edu.eci.arsw.blueprints.model.Point;
@@ -23,14 +22,15 @@ public class SubMuestreo implements Filter {
 
     @Override
     public List<Point> filterBlueprints(Blueprint blueprint) {
-        ArrayList<Point> pts = new ArrayList(blueprint.getPoints());
+        List<Point> ptsBlueprint = blueprint.getPoints();
+        ArrayList<Point> pts = new ArrayList();
         int i = 0;
-        for (int p = 0; p < pts.size(); p++) {
-            if (i == 1) {
-                pts.remove(p);
-                i = 0;
-            } else {
+        for (int p = 0; p < ptsBlueprint.size(); p++) {
+            if (i == 0) {
+                pts.add(ptsBlueprint.get(p));
                 i = 1;
+            } else {
+                i = 0;
             }
         }
         return pts;

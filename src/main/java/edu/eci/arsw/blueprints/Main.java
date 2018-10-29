@@ -27,7 +27,7 @@ public class Main {
     public static void main(String a[]) {
         ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
         bps = ac.getBean(BlueprintsServices.class);
-        Point[] pts = new Point[]{new Point(0, 0), new Point(1, 15), new Point(2, 15), new Point(3, 15), new Point(2, 2), new Point(3, 15)};
+        Point[] pts = new Point[]{new Point(0, 0), new Point(0, 0), new Point(2, 15), new Point(3, 15), new Point(2, 2), new Point(3, 15)};
         Blueprint bp = new Blueprint("juan", "basic", pts);
         Point[] pts1 = new Point[]{new Point(2, 2), new Point(3, 15), new Point(20, 15)};
         Blueprint bp1 = new Blueprint("juan", "basic1", pts1);
@@ -35,8 +35,8 @@ public class Main {
         addBlueprint(bp1);
         //getBlueprint("juan", "basic");
         //getBlueprintWithFilter("juan", "basic");
-        getBlueprintByAuthor("juan");
-        getBlueprintsWithFilterByAuthor("juan");
+        //getBlueprintByAuthor("juan");
+        //getBlueprintsWithFilterByAuthor("juan");
         //getAllBlueprints();
     }
 
@@ -79,14 +79,17 @@ public class Main {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public static void getBlueprintsWithFilterByAuthor(String author) {
         try {
             System.out.print("Blueprint{author=" + author + ", filter result:");
+            int i = 1;
             for (List<Point> lp : bps.getFilteredBlueprintByAuthor(author)) {
-                for(Point p : lp){
-                    System.out.print(p.toString());
-                }                
+                System.out.print("Plane " + i + " ");
+                for (Point p : lp) {
+                    System.out.print(p.toString() + " ");
+                }
+                i++;
             }
             System.out.println("}");
         } catch (BlueprintNotFoundException ex) {

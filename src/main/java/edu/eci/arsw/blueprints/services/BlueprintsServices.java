@@ -29,7 +29,7 @@ public class BlueprintsServices {
     BlueprintsPersistence bpp = null;
 
     @Autowired
-    @Qualifier("Submuestreo")
+    @Qualifier("Redundancia")
     Filter filter = null;
 
     /**
@@ -70,10 +70,23 @@ public class BlueprintsServices {
         return bpp.getAllBlueprints();
     }
 
+    /**
+     *
+     * @param author
+     * @param name
+     * @return
+     * @throws BlueprintNotFoundException
+     */
     public List<Point> getFilteredBlueprint(String author, String name) throws BlueprintNotFoundException {
         return filter.filterBlueprints(getBlueprint(author, name));
     }
     
+    /**
+     *
+     * @param author
+     * @return
+     * @throws BlueprintNotFoundException
+     */
     public List<List<Point>> getFilteredBlueprintByAuthor(String author) throws BlueprintNotFoundException {
         return filter.filterBlueprints(getBlueprintsByAuthor(author));
     }
