@@ -5,9 +5,11 @@
  */
 package edu.eci.arsw.blueprints.filters.impl;
 
+import com.sun.javafx.scene.control.skin.VirtualFlow;
 import edu.eci.arsw.blueprints.filters.Filter;
 import edu.eci.arsw.blueprints.model.Blueprint;
 import edu.eci.arsw.blueprints.model.Point;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import org.springframework.stereotype.Service;
@@ -20,16 +22,27 @@ import org.springframework.stereotype.Service;
 public class SubMuestreo implements Filter {
 
     @Override
-    public Blueprint filterBlueprints(Blueprint blueprint) {
-        List<Point> pts = blueprint.getPoints();
-        for (Point p: pts) {
-            
+    public List<Point> filterBlueprints(Blueprint blueprint) {
+        ArrayList<Point> pts = new ArrayList(blueprint.getPoints());
+        int i = 0;
+        for (int p = 0; p < pts.size(); p++) {
+            if (i == 1) {
+                pts.remove(p);
+                i = 0;
+            } else {
+                i = 1;
+            }
         }
+        return pts;
     }
 
     @Override
-    public Set<Blueprint> filterBlueprints(Set<Blueprint> blueprints) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<List<Point>> filterBlueprints(Set<Blueprint> blueprints) {
+        List<List<Point>> listPts = new ArrayList(new ArrayList());
+        for (Blueprint bp : blueprints) {
+            listPts.add(filterBlueprints(bp));
+        }
+        return listPts;
     }
 
 }

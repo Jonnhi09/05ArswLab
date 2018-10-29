@@ -7,6 +7,8 @@ package edu.eci.arsw.blueprints.filters.impl;
 
 import edu.eci.arsw.blueprints.filters.Filter;
 import edu.eci.arsw.blueprints.model.Blueprint;
+import edu.eci.arsw.blueprints.model.Point;
+import java.util.List;
 import java.util.Set;
 import org.springframework.stereotype.Service;
 
@@ -18,12 +20,12 @@ import org.springframework.stereotype.Service;
 public class Redundancia implements Filter {
 
     @Override
-    public Blueprint filterBlueprints(Blueprint blueprint) {
+    public List<Point> filterBlueprints(Blueprint blueprint) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Set<Blueprint> filterBlueprints(Set<Blueprint> blueprints) {
+    public List<List<Point>>filterBlueprints(Set<Blueprint> blueprints) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

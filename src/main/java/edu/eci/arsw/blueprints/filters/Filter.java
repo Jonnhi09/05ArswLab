@@ -6,6 +6,8 @@
 package edu.eci.arsw.blueprints.filters;
 
 import edu.eci.arsw.blueprints.model.Blueprint;
+import edu.eci.arsw.blueprints.model.Point;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -14,8 +16,8 @@ import java.util.Set;
  */
 public interface Filter {
     
-    public Blueprint filterBlueprints(Blueprint blueprint);
+    public List<Point> filterBlueprints(Blueprint blueprint);
     
-    public Set<Blueprint> filterBlueprints(Set<Blueprint> blueprints);
+    public List<List<Point>> filterBlueprints(Set<Blueprint> blueprints);
     
 }

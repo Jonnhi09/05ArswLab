@@ -47,7 +47,7 @@ public class Blueprint {
     public String toString() {
         String r = "Blueprint{" + "author=" + author + ", name=" + name + ": ";
         for (Point p : points) {
-            r += p.ToString();
+            r += p.toString();
         }
         return r + '}';
     }

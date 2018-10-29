@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import edu.eci.arsw.blueprints.filters.Filter;
+import edu.eci.arsw.blueprints.model.Point;
+import java.util.List;
 
 /**
  *
@@ -27,7 +29,7 @@ public class BlueprintsServices {
     BlueprintsPersistence bpp = null;
 
     @Autowired
-    @Qualifier("")
+    @Qualifier("Submuestreo")
     Filter filter = null;
 
     /**
@@ -66,5 +68,13 @@ public class BlueprintsServices {
      */
     public Set<Blueprint> getAllBlueprints() {
         return bpp.getAllBlueprints();
+    }
+
+    public List<Point> getFilteredBlueprint(String author, String name) throws BlueprintNotFoundException {
+        return filter.filterBlueprints(getBlueprint(author, name));
+    }
+    
+    public List<List<Point>> getFilteredBlueprintByAuthor(String author) throws BlueprintNotFoundException {
+        return filter.filterBlueprints(getBlueprintsByAuthor(author));
     }
 }
