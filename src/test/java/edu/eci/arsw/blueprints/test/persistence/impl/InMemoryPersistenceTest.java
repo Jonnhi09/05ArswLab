@@ -10,6 +10,8 @@ import edu.eci.arsw.blueprints.model.Point;
 import edu.eci.arsw.blueprints.persistence.BlueprintNotFoundException;
 import edu.eci.arsw.blueprints.persistence.BlueprintPersistenceException;
 import edu.eci.arsw.blueprints.persistence.impl.InMemoryBlueprintPersistence;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.Test;
@@ -61,12 +63,36 @@ public class InMemoryPersistenceTest {
             ibpp.saveBlueprint(bp2);
             fail("An exception was expected after saving a second blueprint with the same name and autor");
         } catch (BlueprintPersistenceException ex) {
-
         }
     }
 
     @Test
-    public void getBluePrint() {
+    public void getBluePrintsByAuthor() {
+        InMemoryBlueprintPersistence ibpp = new InMemoryBlueprintPersistence();
+        Set<Blueprint> blueprintsAuthor = new HashSet<>();
+        
+        Point[] pts = new Point[]{new Point(0, 0), new Point(10, 10)};
+        Blueprint bp = new Blueprint("john", "thepaint", pts);
 
+        blueprintsAuthor.add(bp);
+        
+        Point[] pts1 = new Point[]{new Point(40, 40), new Point(15, 15)};
+        Blueprint bp1 = new Blueprint("john", "mypaint", pts1);
+
+        blueprintsAuthor.add(bp1);
+        
+        try {
+            ibpp.saveBlueprint(bp);
+            ibpp.saveBlueprint(bp1);
+        } catch (BlueprintPersistenceException ex) {
+            fail("Blueprint persistence failed inserting blueprints.");
+        }
+
+        try {
+            assertNotNull("Loading a previously stored blueprint returned null.", ibpp.getBlueprintsByAuthor("john"));
+            assertEquals("Loading a previously stored blueprint returned a different blueprint.", ibpp.getBlueprintsByAuthor("john"), blueprintsAuthor);
+        } catch (BlueprintNotFoundException ex) {
+            fail("Blueprint persistence failed getting blueprints.");
+        }
     }
 }
