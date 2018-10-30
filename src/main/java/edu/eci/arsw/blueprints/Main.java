@@ -48,22 +48,6 @@ public class Main {
         }
     }
 
-    public static void getBlueprint(String author, String name) {
-        try {
-            System.out.println(bps.getBlueprint(author, name));
-        } catch (BlueprintNotFoundException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public static void getBlueprintByAuthor(String author) {
-        try {
-            System.out.println(bps.getBlueprintsByAuthor(author));
-        } catch (BlueprintNotFoundException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
     public static void getAllBlueprints() {
         System.out.println(bps.getAllBlueprints());
     }
